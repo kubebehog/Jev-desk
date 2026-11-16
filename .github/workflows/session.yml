@@ -1,0 +1,72 @@
+name: desk session (PAPER)
+# PAPER ONLY. Public market data, no wallets, no keys, no real orders. Push alerts are off here (DESK_NO_PUSH).
+# Code lives on main; the book (ledger.jsonl, state.json, logs/) lives on branch `book`.
+# minutes > 345 chain: each leg runs <= 345 min, flattens on paper, then dispatches the next leg with the rest.
+on:
+  workflow_dispatch:
+    inputs:
+      minutes: {description: "total paper minutes (legs of <=345 chain on their own, max 720)", required: true, default: "345"}
+      mode: {description: "desk mode (config.MODES)", required: true, default: "goal"}
+      goal: {description: "goal in paper USD (optional)", required: false, default: ""}
+      chain: {description: "set by the previous leg, leave empty", required: false, default: ""}
+permissions:
+  contents: write
+  actions: write
+concurrency: {group: desk-book, cancel-in-progress: false}
+jobs:
+  session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    env:
+      TZ: Asia/Jerusalem
+      DESK_NO_PUSH: "1"
+      DESK_CLOUD: "1"
+      PYTHONUNBUFFERED: "1"
+      IN_MINUTES: ${{ inputs.minutes }}
+      IN_MODE: ${{ inputs.mode }}
+      IN_GOAL: ${{ inputs.goal }}
+      IN_CHAIN: ${{ inputs.chain }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q -r requirements.txt
+      - name: plan the leg
+        run: |
+          python3 - <<'PY' >> "$GITHUB_ENV"
+          import os, config
+          total = int(float(os.environ["IN_MINUTES"])); assert 1 <= total <= 720, "minutes must be 1..720"
+          assert os.environ["IN_MODE"] in config.MODES, "unknown mode"
+          leg = min(total, 345)
+          print(f"LEG={leg}"); print(f"REST={total - leg}")
+          print(f"CHAIN={os.environ['IN_CHAIN'] or os.environ['GITHUB_RUN_ID']}")
+          PY
+      - name: book in (branch book -> working dir)
+        run: |
+          git fetch -q origin book:book
+          git worktree add -q book book
+          cp book/ledger.jsonl book/state.json .
+          python3 -c "import store; s = store.load_state(); (s.get('session') or {}).pop('pid', None); store.save_state(s); print('book in · cash', s['cash'], '· open', len(s['positions']))"
+      - name: public data sources answer from the runner
+        run: python3 .github/check_sources.py
+      - name: session (foreground) + book commit every 10 min
+        run: |
+          set -o pipefail
+          ( while sleep 600; do bash .github/book.sh mid || true; done ) & LOOP=$!
+          trap 'kill $LOOP 2>/dev/null || true' EXIT
+          echo "leg $LEG min of $IN_MINUTES · rest $REST · chain $CHAIN"
+          python3 desk.py start --minutes "$LEG" --mode "$IN_MODE" ${IN_GOAL:+--goal "$IN_GOAL"} --foreground 2>&1 | tee "session-run$GITHUB_RUN_ID.log"
+      - name: flatten on paper + final book commit
+        if: always()
+        run: |
+          pkill -f 'book.sh' || true; pkill -INT -f 'desk.py start' || true; sleep 2; pkill -f 'bots.run' || true; sleep 1
+          python3 -c "import store, sys; sys.exit(0 if store.load_state()['positions'] else 1)" && python3 desk.py close-all --reason "cloud run ended: flatten, no session watching" || echo "book flat"
+          bash .github/book.sh final
+      - name: chain the next leg
+        if: success() && env.REST != '0'
+        run: |
+          WHY=$(python3 -c "import store; print(next((x['why'] for x in reversed(store.read_ledger()) if x['kind']=='session_end'), ''))")
+          if [ "$WHY" = "goal" ] || [[ "$WHY" == stop* ]]; then echo "session ended by '$WHY': no next leg"; exit 0; fi
+          gh workflow run session.yml --ref "$GITHUB_REF_NAME" -f minutes="$REST" -f mode="$IN_MODE" -f goal="$IN_GOAL" -f chain="$CHAIN"
+          echo "next leg dispatched: $REST min"
