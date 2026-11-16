@@ -3,8 +3,25 @@
  "mode": "goal",
  "goal_usd": 2000.0,
  "start_usd": 1000.0,
- "cash": 984.549412,
- "positions": {},
+ "cash": 787.639412,
+ "positions": {
+  "CHuLmJXz8F3YXUyv984PRxeECfSvqD5MZ3W1FoDmpump": {
+   "mint": "CHuLmJXz8F3YXUyv984PRxeECfSvqD5MZ3W1FoDmpump",
+   "symbol": "BJB",
+   "mode": "goal",
+   "entry_quote": 0.001823,
+   "entry_fill": 0.001839402506327671,
+   "qty": 105980.55582146371,
+   "qty0": 105980.55582146371,
+   "cost_usd": 196.91,
+   "realized_usd": 0.0,
+   "peak": 0.001823,
+   "tp_done": 0,
+   "opened": 1794810591.6426687,
+   "liq_at_entry": 98515.71,
+   "url": "https://dexscreener.com/solana/8184mbydwzxdzswsnvdxcdvbffqqjnzqukm1qa5ll17k"
+  }
+ },
  "halted": false,
  "picks": [],
  "one_coin": null,
@@ -1723,15 +1740,15 @@
  "created": 1794762013.792,
  "vault": 0.0,
  "session": {
-  "sid": "20261116-0821",
-  "night": 6,
+  "sid": "20261116-0829",
+  "night": 7,
   "kind": "custom",
-  "start_ts": 1794810080.6891751,
-  "end_ts": 1794810440.6891654,
-  "start_equity": 1000.0,
+  "start_ts": 1794810552.3117194,
+  "end_ts": 1794831252.311709,
+  "start_equity": 984.5494,
   "goal_usd": null,
   "mode": "goal",
-  "pid": 2413
+  "pid": 2227
  },
- "nights": 6
+ "nights": 7
 }
