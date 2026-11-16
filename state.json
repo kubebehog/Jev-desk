@@ -3,8 +3,25 @@
  "mode": "goal",
  "goal_usd": 2000.0,
  "start_usd": 1000.0,
- "cash": 1000.0,
- "positions": {},
+ "cash": 800.0,
+ "positions": {
+  "2NUaS6Gfrm5rBuPBn7svHka8t33SrSkpXGQiUvZLpump": {
+   "mint": "2NUaS6Gfrm5rBuPBn7svHka8t33SrSkpXGQiUvZLpump",
+   "symbol": "Anthropig",
+   "mode": "goal",
+   "entry_quote": 0.001091,
+   "entry_fill": 0.0011021976583718326,
+   "qty": 179641.10021108718,
+   "qty0": 179641.10021108718,
+   "cost_usd": 200.0,
+   "realized_usd": 0.0,
+   "peak": 0.001091,
+   "tp_done": 0,
+   "opened": 1794810118.73648,
+   "liq_at_entry": 75992.68,
+   "url": "https://dexscreener.com/solana/4rm7lq7udxmmmgv88qjk1ck22xuq3cxg9qqiymbhksnq"
+  }
+ },
  "halted": false,
  "picks": [],
  "one_coin": null,
@@ -1723,15 +1740,15 @@
  "created": 1794762013.792,
  "vault": 0.0,
  "session": {
-  "sid": "20261116-0014",
-  "night": 5,
+  "sid": "20261116-0821",
+  "night": 6,
   "kind": "custom",
-  "start_ts": 1794780846.9659858,
-  "end_ts": 1794802446.9659758,
+  "start_ts": 1794810080.6891751,
+  "end_ts": 1794810440.6891654,
   "start_equity": 1000.0,
   "goal_usd": null,
   "mode": "goal",
-  "pid": 693113
+  "pid": 2413
  },
- "nights": 5
+ "nights": 6
 }
