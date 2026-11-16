@@ -50,10 +50,10 @@ jobs:
           python3 -c "import store; s = store.load_state(); (s.get('session') or {}).pop('pid', None); store.save_state(s); print('book in · cash', s['cash'], '· open', len(s['positions']))"
       - name: public data sources answer from the runner
         run: python3 .github/check_sources.py
-      - name: session (foreground) + book commit every 10 min
+      - name: session (foreground) + book commit at 2 min, then every 10 min
         run: |
           set -o pipefail
-          ( while sleep 600; do bash .github/book.sh mid || true; done ) & LOOP=$!
+          ( sleep 120; while true; do bash .github/book.sh mid || true; sleep 600; done ) & LOOP=$!   # first book commit at 2 min, then every 10
           trap 'kill $LOOP 2>/dev/null || true' EXIT
           echo "leg $LEG min of $IN_MINUTES · rest $REST · chain $CHAIN"
           python3 desk.py start --minutes "$LEG" --mode "$IN_MODE" ${IN_GOAL:+--goal "$IN_GOAL"} --foreground 2>&1 | tee "session-run$GITHUB_RUN_ID.log"

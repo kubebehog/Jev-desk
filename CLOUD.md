@@ -10,7 +10,7 @@ no app/). Branch `book` = the data: `ledger.jsonl`, `state.json`, `logs/`. Workf
     python3 cloud.py pull                                            # back up local book, take `book`'s copy, rebuild page data
 
 How a run works: checkout main → copy the book from `book` → check DexScreener/RugCheck/GeckoTerminal/Jupiter/RPC answer
-→ `desk.py start --foreground` (same JEV + 7 seats as on the box) → a background loop commits the book to `book`
+→ `desk.py start --foreground` (same JEV + 7 seats as on the box) → a background loop commits the book to `book` at 2 min, then
 every 10 min → final step (`if: always()`, also on failure/cancel) flattens anything still open on paper and commits.
 Push alerts are forced off in the cloud (`DESK_NO_PUSH=1`).
 
