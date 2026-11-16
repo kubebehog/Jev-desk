@@ -1,2 +1,11 @@
 [08:29:12] chief    Night 7 · custom · mode goal · paper equity $984.55 · ends 14:14 · PAPER, no wallets
 [08:29:50] scan     116 scanned · 30 vetted · 5 pass hard+soft · 5 asked
+[08:31:19] scan     128 scanned · 5 vetted · 4 pass hard+soft · 9 asked
+[08:33:17] scan     125 scanned · 4 vetted · 4 pass hard+soft · 13 asked
+[08:33:17] vet      no entry: signal 4 (missing = fail)
+[08:35:20] scan     125 scanned · 5 vetted · 4 pass hard+soft · 17 asked
+[08:35:20] vet      no entry: signal 4 (missing = fail)
+[08:37:18] scan     125 scanned · 4 vetted · 4 pass hard+soft · 21 asked
+[08:37:18] vet      no entry: signal 4 (missing = fail)
+[08:39:18] scan     124 scanned · 4 vetted · 4 pass hard+soft · 25 asked
+[08:39:18] vet      no entry: signal 3, shape_weak 1 (missing = fail)
