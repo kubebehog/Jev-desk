@@ -62,6 +62,7 @@ jobs:
         run: |
           pkill -f 'book.sh' || true; pkill -INT -f 'desk.py start' || true; sleep 2; pkill -f 'bots.run' || true; sleep 1
           python3 -c "import store, sys; sys.exit(0 if store.load_state()['positions'] else 1)" && python3 desk.py close-all --reason "cloud run ended: flatten, no session watching" || echo "book flat"
+          python3 -c "import store; s = store.load_state(); (s.get('session') or {}).pop('pid', None); store.save_state(s)"   # a runner pid means nothing on the box
           bash .github/book.sh final
       - name: chain the next leg
         if: success() && env.REST != '0'
