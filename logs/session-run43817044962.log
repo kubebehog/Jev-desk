@@ -9,3 +9,12 @@
 [08:37:18] vet      no entry: signal 4 (missing = fail)
 [08:39:18] scan     124 scanned · 4 vetted · 4 pass hard+soft · 25 asked
 [08:39:18] vet      no entry: signal 3, shape_weak 1 (missing = fail)
+[08:41:20] scan     125 scanned · 4 vetted · 3 pass hard+soft · 28 asked
+[08:41:20] vet      no entry: signal 3 (missing = fail)
+[08:43:18] scan     125 scanned · 3 vetted · 3 pass hard+soft · 31 asked
+[08:43:18] vet      no entry: signal 2 (missing = fail)
+[08:45:18] scan     126 scanned · 3 vetted · 3 pass hard+soft · 34 asked
+[08:45:18] vet      no entry: signal 2 (missing = fail)
+[08:47:20] scan     132 scanned · 3 vetted · 3 pass hard+soft · 37 asked
+[08:47:20] vet      no entry: signal 1 (missing = fail)
+[08:49:21] scan     129 scanned · 4 vetted · 3 pass hard+soft · 40 asked
