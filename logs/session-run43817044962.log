@@ -18,3 +18,9 @@
 [08:47:20] scan     132 scanned · 3 vetted · 3 pass hard+soft · 37 asked
 [08:47:20] vet      no entry: signal 1 (missing = fail)
 [08:49:21] scan     129 scanned · 4 vetted · 3 pass hard+soft · 40 asked
+[08:51:20] scan     131 scanned · 2 vetted · 2 pass hard+soft · 42 asked
+[08:51:20] vet      no entry: signal 1 (missing = fail)
+[08:53:22] scan     128 scanned · 4 vetted · 2 pass hard+soft · 44 asked
+[08:53:22] vet      no entry: signal 1 (missing = fail)
+[08:55:39] scan     127 scanned · 19 vetted · 3 pass hard+soft · 47 asked
+[08:55:40] chief    session crashed (KeyboardInterrupt: ), flattening
