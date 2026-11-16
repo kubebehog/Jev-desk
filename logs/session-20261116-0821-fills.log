@@ -1,1 +1,4 @@
 [08:21:58] executor PAPER BUY Anthropig $200.00 @ 0.0011021977 (quote 0.001091, slip 1.03%, fee $2.00) - goal: JEV approved (every question + signal PASS)
+[08:25:26] executor PAPER BUY BJB $160.00 @ 0.0018028012 (quote 0.001788, slip 0.83%, fee $1.60) - goal: JEV approved (every question + signal PASS)
+[08:27:21] executor PAPER SELL Anthropig 100% @ 0.0010690611 net $190.13 pnl $-9.87 - session end (end time): flatten, no session watching
+[08:27:21] executor PAPER SELL BJB 100% @ 0.0017752856 net $154.42 pnl $-5.58 - session end (end time): flatten, no session watching
