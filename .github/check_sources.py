@@ -1,9 +1,9 @@
 """Do the public data sources answer from this runner? DexScreener is required; the rest are reported."""
 import sys, requests
 H = {"User-Agent": "Mozilla/5.0 hrundel-desk-paper/1.0"}
-SOL, USDC = "So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybivfFS6r5qgxLqtzWHzS"
+SOL, USDC = "So11111111111111111111111111111111111111112", "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
 U = {"dexscreener": "https://api.dexscreener.com/token-profiles/latest/v1",
-     "rugcheck": f"https://api.rugcheck.xyz/v1/tokens/{USDC}/report/summary",
+     "rugcheck": f"https://api.rugcheck.xyz/v1/tokens/{SOL}/report",
      "geckoterminal": "https://api.geckoterminal.com/api/v2/networks/solana/trending_pools",
      "jupiter": f"https://lite-api.jup.ag/swap/v1/quote?inputMint={USDC}&outputMint={SOL}&amount=1000000&slippageBps=200",
      "solana-rpc": "https://api.mainnet-beta.solana.com"}
